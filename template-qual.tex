@@ -24,7 +24,7 @@
 %%           oneside - para impressao em face unica
 %%           twoside - para impressao em frente e verso (padrao)
 
-% Aten��o: Manter 'classic' na declaracao abaixo:
+% Atencao: Manter 'classic' na declaracao abaixo:
 \documentclass[qual, classic, a4paper]{ufbathesis}
 
 %% Preambulo:
@@ -41,6 +41,7 @@
 \usepackage{xfrac}
 \usepackage[FIGTOPCAP]{subfigure}
 \usepackage[printonlyused, withpage]{acronym}
+%\usepackage[colorlinks,citecolor=blue]{hyperref}
 
 % Universidade
 \university{Universidade Federal da Bahia}
@@ -61,28 +62,28 @@
 \majorfield{Ci\^{e}ncia da Computa\c{c}\~{a}o}
 
 % Titulo da dissertacao
-\title{T\'{\i}tulo da Disserta\c{c}\~{a}o ou Tese}
+\title{Uma Proposta de Simula\c{c}\~{a}o Computacional para a Pintura Hidrogr\'{a}fica}
 
 % Data da defesa
 % e.g. \date{19 de fevereiro de 2013}
-\date{13 de janeiro de 2014}
+\date{10 de julho de 2018}
 % e.g. \defenseyear{2013}
-\defenseyear{2014}
+\defenseyear{2018}
 
 % Autor
 % e.g. \author{Jose da Silva}
-\author{Nome Completo do AUTOR}
+\author{Leonardo Thomas Torres Santos}
 
 % Orientador(a)
 % Opcao: [f] - para orientador do sexo feminino
 % e.g. \adviser[f]{Profa. Dra. Maria Santos}
-\adviser[f]{Nome Completo da ORIENTADORA}
+\adviser{Karl Philips Apaza Ag\"{u}ero}
 
 % Orientador(a)
 % Opcao: [f] - para orientador do sexo feminino
 % e.g. \coadviser{Prof. Dr. Pedro Pedreira}
 % Comente se nao ha co-orientador
-\coadviser{Nome Completo do CO-ORIENTADOR}
+% \coadviser{Nome Completo do CO-ORIENTADOR}
 
 %% Inicio do documento
 \begin{document}
@@ -112,7 +113,7 @@ N\~{a}o precisa fazer dessa forma, caso use pacotes adequados (latin1, etc.).
 
 % Palavras-chave do resumo em Portugues
 \begin{keywords}
-PALAVRAS-CHAVE.
+Impress\~{a}o 3D, hidrografia, simula\c{c}\~{a}o f\'{i}sica, fluidos, mapeamento de texturas.
 \end{keywords}
 
 %%%%%%%%%%%%%%%%%%%
@@ -123,7 +124,7 @@ PALAVRAS-CHAVE.
 COLOQUE O RESUMO EM INGL\^{E}S. Se preferir, crie um arquivo separado e o inclua via comando include.
 % Palavras-chave do resumo em Ingles
 \begin{keywords}
-PALAVRAS-CHAVE EM INGL\^{E}S.
+3d printing, hydrographics, physical simulation, fluids, texture mapping 
 \end{keywords}
 
 %%%%%%%%%%%%%%%%%%%
@@ -162,115 +163,32 @@ PALAVRAS-CHAVE EM INGL\^{E}S.
 % \include{capituloN}
 %
 % Importante: 
-% Use \xchapter{}{} ao inves de \chapter{}; se n�o quiser colocar texto antes do inicio do capitulo, use \xchapter{texto}{}.
+% Use \xchapter{}{} ao inves de \chapter{}; se nao quiser colocar texto antes do inicio do capitulo, use \xchapter{texto}{}.
 
-\xchapter{Introdu\c{c}\~{a}o}{Este eh o primeiro cap\'{\i}tulo, onde eu conto toda a historia deste trabalho, o problema, a solu\c{c}\~{a}o, etc.}
+\include{capitulo1}%introducao
 
-% É recomendável utilizar `\acresetall' no início de cada capítulo para reiníciar o contator de referências às siglas.
-\acresetall 
+\include{capitulo2}%fundamentacao
 
-\section{Se\c{c}\~{a}o}
-Trabalho do  \ac{PGCOMP}. Bolsa do \ac{CNPq}.
+\include{capitulo3}%def-proposta
 
-\begin{figure}[h]
-    Figure
-    \caption{As siglas também funcionam nas legendas, seja na forma de sigla \ac{CNPq}, seja na forma completa \acf{PGCOMP}.}
-\end{figure}
-
-\lipsum
-
-\subsection{Uma Subse\c{c}\~{a}o}
-\acresetall
-Texto para mostrar como o \verb|\acresetall| funciona \ac{CNPq}, \ac{PGCOMP}. Ele reseta os contadoes e faz a sigla aparecer na forma estendida novamente.
-
-\subsection{Outra Subse\c{c}\~{a}o}
-
-Texto  \acf{CNPq}, \acf{PGCOMP}.
-\xchapter{Revis\~{a}o Bibliogr\'{a}fica}{Neste cap\'{\i}tulo eu apresento todo o material que eu estudei durante a elabora\c{c}\~{a}o do trabalho.}
-
-\lipsum
-
-Livro \cite{demeyer2008} e  livro \cite{raymond1999}.
-
-\xchapter{Exemplos}{} %sem preambulo
-
-A numera\c{c}\~{a}o de figuras \'{e} sequencial, dentro do cap\'{\i}tulo. Ver Figura \ref{default-regular1} e Figura \ref{default-regular2}.
-
-A numera\c{c}\~{a}o de tabelaas \'{e} sequencial, dentro do cap\'{\i}tulo. Ver Tabela \ref{default-table1} e Tabela \ref{default-table2}.
-
-
-\section{Exemplos de Figura}
-
-\begin{figure}[htbp]
-\begin{center}
-  \includegraphics[scale=0.5]{ufba.eps}
-\caption{Bras\~{a}o da UFBA - Menor.}
-\label{default-regular1}
-\end{center}
-\end{figure}
-
-\begin{figure}[htbp]
-\begin{center}
-  \includegraphics[scale=0.75]{ufba.eps}
-\caption{Bras\~{a}o da UFBA - Maior.}
-\label{default-regular2}
-\end{center}
-\end{figure}
-
-\lipsum
-
-\section{Exemplos de Tabela}
-\subsection{Uma Tabela}
-\begin{table}[htbp]
-\caption{Uma tabela com 3 linhas e 2 colunas.}
-\begin{center}
-\begin{tabular}{|c|c|} 
-\hline
-elemento 11 & elemento 12 \\ \hline
-elemento 21 & elemento 22 \\ \hline
-elemento 31 & elemento 32 \\
-\hline
-\end{tabular}
-\end{center}
-\label{default-table1}
-\end{table}%
-
-\lipsum
-
-\begin{table}[htbp]
-\caption{Uma tabela com 3 linhas e 3 colunas.}
-\begin{center}
-\begin{tabular}{|l|c|c|} 
-\hline
-elemento 11 & elemento 12 & elemento 13\\ \hline
-elemento 21 & elemento 22 & elemento 23\\ \hline
-elemento 31 & elemento 32 & elemento 33\\
-\hline
-\end{tabular}
-\end{center}
-\label{default-table2}
-\end{table}%
-
-\xchapter{Outro cap\'{\i}tulo}{} %sem preambulo
-\lipsum
-
+\include{capitulo4}%metodologia
 
 %% Parte pos-textual
 \backmatter
 
 % Bibliografia
-% � aconselh�vel utilizar o BibTeX a partir de um arquivo, digamos "biblio.bib".
-% Para ajuda na cria��o do arquivo .bib e utiliza��o do BibTeX, recorra ao
+% Eh aconselhavel utilizar o BibTeX a partir de um arquivo, digamos "biblio.bib".
+% Para ajuda na criacao do arquivo .bib e utilizacao do BibTeX, recorra ao
 % BibTeXpress em www.cin.ufpe.br/~paguso/bibtexpress
 \bibliographystyle{abntex2-alf}
 \bibliography{biblio}
 
 % Apendices
 % Comente se naoo houver apendices
-\appendix
+%\appendix
 
-\xchapter{Exemplo de Ap\^endice}{} %sem preambulo
-\lipsum
+%\xchapter{Exemplo de Ap\^endice}{} %sem preambulo
+%\lipsum
 % Eh aconselhavel criar cada apendice em um arquivo separado, digamos
 % "apendice1.tex", "apendice.tex", ... "apendiceM.tex" e depois
 % inclui--los com:
