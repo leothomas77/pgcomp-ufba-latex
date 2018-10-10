@@ -1,62 +1,23 @@
-\xchapter{Introdução}{Neste capítulo, será dada uma contextualização sobre o trabalho, a apresentação do problema, hipóteses de pesquisa e principais objetivos.}
+\xchapter{Introdu\c{c}\~{a}o}{Este eh o primeiro cap\'{\i}tulo, onde eu conto toda a historia deste trabalho, o problema, a solu\c{c}\~{a}o, etc.}
+
+Texto da introdução com a contextualização, o marco teórico e a formulação de hipóteses.
 
 % É recomendável utilizar `\acresetall' no início de cada capítulo para reiníciar o contator de referências às siglas.
 \acresetall 
 
-\section{Contexto}
+\section{Se\c{c}\~{a}o}
+Trabalho do  \ac{PGCOMP}. Bolsa do \ac{CNPq}.
 
-O processo de fabricação com a impressão 3D vem se desenvolvendo rapidamente nos últimos anos, despertando o interesse de muitas áreas. Porém, apesar do desenvolvimento crescente na produção de formas complexas, criar objetos coloridos ainda é um desafio. Isto ocorre porque a maioria das impressoras 3D disponíveis geram objetos com somente uma cor. Há alguns dispositivos \textit{high-end} que geram a forma e incorporam a coloração durante o processo, tornando a geração do objeto indissociável da pigmentação. Muitas vezes, esta opção é a menos desejável, pois restringe a escolha da impressora 3D, tirando-se a liberdade de se escolher um equipamento com o menor custo possível. Dentre as outras opções para se colorir um material em 3D, destacam-se as técnicas de pintura tradicional e as técnicas que utilizam decalques.
+\begin{figure}[h]
+    Figure
+    \caption{As siglas também funcionam nas legendas, seja na forma de sigla \ac{CNPq}, seja na forma completa \acf{PGCOMP}.}
+\end{figure}
 
-A pintura tradicional pode ser realizada com o aerógrafo (através de vaporização da tinta), rolo ou pincel. Todas estas técnicas requerem um bom domínio operacional e um bom conhecimento dos processos e materiais envolvidos (tipo de tinta adequado para o tipo de substrato, diluentes, preparação da superfície, aplicação de camadas, tempo de cura e acabamento). Parte do material usado na pintura é desperdiçado. Isto ocorre por aplicação da tinta em partes extras (provocando sujeira), por conta de dimensionamento inadequado do material, ou mesmo pelo desperdício do usuário. É um processo que depende bastante de se ter pessoas qualificadas, aumentando-se o custo de mão de obra. Técnicas tradicionais de pintura geram um resultado diferente para cada peça, dificultando a previsibilidade do trabalho. A natureza da técnica faz com que cada peça pintada à mão resulte em um trabalho artístico único.
 
-A Pintura Hidrográfica é conhecida também pelos nomes \textit{Water Transfer Printing}, \textit{Hydrographic Printing} ou simplesmente \textit{Hydrographics}. É considerada como uma das técnicas para coloração de formas 3D a partir de decalques. Pode ser aplicada em diversos tipos de materiais como cerâmica, fibra de vidro, madeira, plástico, metal. O objeto trabalhado, portanto, pode ter sido gerado em qualquer equipamento. Nesta técnica, o desenho (ou padrão) é impresso em um filme especial de material polivinílico. Este filme é posto a flutuar em um tanque contendo água e é submetido a uma reação ativadora. O objeto é submergido lentamente no tanque, de forma que vai encostando na superfície da água, que contém a película. A transferência do padrão impresso ocorrerá a através do contato do filme com o substrato. O processo de pintura hidrográfica possui alguns passos bem definidos que uma vez seguidos, produzem um acabamento de qualidade para objetos com formas não tão complexas (como no caso de peças automotivas). Existem diversos tipos de filmes com estampas, cujos desenhos podem variar desde uma cor plana até padronagens complexas, como texturas que imitam madeira, rocha, camuflagem, pele, couro e uma grande variedade de estampas que imitam texturas do mundo real. Existem também filmes totalmente transparentes, comercializados no tamanho de um papel A4. Desta maneira, podem receber qualquer desenho impresso por uma impressora de pigmentos.
+\subsection{Uma Subse\c{c}\~{a}o}
+\acresetall
+Texto para mostrar como o \verb|\acresetall| funciona \ac{CNPq}, \ac{PGCOMP}. Ele reseta os contadoes e faz a sigla aparecer na forma estendida novamente.
 
-Outra técnica de pintura para objetos impressos em 3D é a pintura por Termoformagem. Apesar de ser uma técnica distinta da pintura hidrográfica, a termoformagem trata-se de um processo que possui algumas semelhanças com a pintura hidrográfica: ambos lidam com uma película na qual se dará a transferência de uma imagem para um objeto 3D.
+\subsection{Outra Subse\c{c}\~{a}o}
 
-No caso da termoformagem, uma lâmina plástica é aquecida em um dispositivo similar a uma estufa. A lâmina passa então a adquirir propriedades plásticas e elásticas. Após esta etapa, a lâmina plástica entrará em contato com o objeto pintado. Será então submetida a um processo de sucção, formando um vácuo no qual a pressão exercida terminará fazendo com que haja a adesão da lâmina plástica com o objeto. Neste caso, a termoformagem lida com outras questões, como por exemplo resolver as regiões da peça em que podem vir formar bolhas de ar.
-
-\section{Problema}
-
-Na pintura hidrográfica usual, frequentemente se transfere um padrão que é uma grafia repetitiva imitando algum tipo de material (fibra de carbono, camuflagem, madeira). Nestes casos, não há necessidade de precisão de alinhamento entre o padrão de cor contido no filme e o objeto que está sendo colorido. No entanto, caso o objetivo da pintura hidrográfica seja dar uma coloração específica para pontos específicos de uma peça impressa em 3D, seria necessário um mapeamento preciso das cores da imagem 2D, contida no filme, para os pontos da superfície do objeto 3D. Realizar esta operação com a pintura hidrográfica usual é uma tarefa difícil, pois não há um controle de como este mapeamento se realizará.
-
-No contexto geral, a fabricação de objetos 3D coloridos é uma tarefa difícil que vem sendo pesquisada nos últimos anos. Os trabalhos \cite{zhang2015}, \cite{panozzo2015} apresentaram contribuições importantes neste campo de estudo usando a pintura hidrográfica. Mesmo assim, devido às diversas dificuldades encontradas, ainda é um problema em aberto, com amplo espaço para desenvolvimento e surgimento de novas propostas.
-
-\subsection{Pintura Hidrográfica Computacional}
-
-No trabalho de \cite{zhang2015}, é apresentada uma abordagem de simulação computacional para hidropintura, que possibilita prever a distorção do filme e da cor durante o processo de pintura hidrográfica. O trabalho também propõe um método para automatizar parte do processo físico da pintura, através de um equipamento físico que controla a imersão do objeto na água. Ainda neste trabalho, é proposta uma solução de múltiplas imersões para dar um tratamento adequado que cubra completamente as formas mais complexas.
-
-Outro trabalho, \cite{panozzo2015} apresenta contribuições para o mesmo propósito. Neste trabalho é feito um estudo detalhado das condições em que se realiza a pintura hidrográfica. Com base neste levantamento descritivo, é proposto um conjunto de ferramentas físicas e computacionais que possibilite o usuário a obter resultados mais precisos e consistentes na realização da pintura hidrográfica. A solução algorítmica busca dar um tratamento ao problema de forma distinta do primeiro trabalho. É descrito um algoritmo no qual se pode simular o processo da pintura e a distorção sofrida pelo filme ao aderir na superfície de um corpo arbitrário.
-
-Em comum, estes trabalhos propõem uma modelagem discreta do problema. Representam a película como sendo uma malha de triângulos 2D. Fazem uso do \acs{MEF} (\acl{MEF}) \cite{bathe2007finite} em alguma etapa do processo para determinar os valores das velocidades em \cite{zhang2015}, ou para cálculo das forças no sistema elástico em \cite{panozzo2015}, quando em processo dinâmico de imersão do corpo. Em seguida, propõem uma simulação computacional para encontrar a função de mapeamento dos pontos do objeto 3D para a textura em 2D.
-
-Os trabalhos citados deixam em aberto alguns problemas como:
-\begin{itemize}
-\item Dificuldade de controlar o processo quando o ângulo entre a superfície do corpo e a linha d'água é maior do que 45$^{\circ}$
-\item Dificuldade de determinar a distorção da cor
-\item Necessidade de sugerir uma posição de imersão que proporcione um melhor aproveitamento do filme, com uma melhor cobertura
-\item Necessidade de garantir a reprodução dos resultados
-\item Nem sempre se consegue trabalhar corretamente com objetos que possuem grandes concavidades ou auto-oclusões (mesmo com múltiplas imersões)
-\item Dificuldade em estimar a variação da espessura do filme, que se mostrou um processo não linear
-\end{itemize}
-
-Quanto à implementação da simulação computacional, em \cite{zhang2015} não foi realizada uma simulação 3D na GPU. Optou-se então por realizar a simulação 3D na CPU, já que a simulação ficou suficientemente simples ao levar o problema para o domínio 2D (o cálculo de um campo de velocidades 2D para uma lâmina d'água). Assumiu-se que a taxa de atualização da animação ficou suficiente para as necessidades do usuário. Porém, os exemplos usados levaram até 5 minutos para simular uma única imersão. Isto pode ser um tempo alto quando se deseja uma maior dinâmica na prototipação de um produto ou a implementação de uma simulação 3D em tempo real. Já em \cite{panozzo2015}, não é mencionado se houve a simulação 3D em GPU, ficando o trabalho omisso neste aspecto.
-
-\section{Hipóteses e objetivos da pesquisa}
-
-Diante do exposto, com base na exposição do problema e no conhecimento da possível combinação de técnicas da computação gráfica, a principal pergunta do estudo foi assim formulada:
-
-\begin{quote}
-É possível realizar uma simulação computacional eficiente que reproduza o fenômeno da pintura hidrográfica?
-\end{quote}
-
-Segue abaixo uma relação de objetivos específicos do trabalho:
-\begin{itemize}
-\item Levantar detalhes de como ocorre processo físico da pintura hidrográfica
-\item Proporcionar uma ferramenta com base em simulação computacional que possibilite incorporar melhorias no processo da pintura. Entende-se que melhorias seriam quaisquer meios que ajudem a: evitar perda de material, dar uma previsibilidade do resultado, fazer mapeamento da imagem colorida do filme para o objeto imerso.
-\item Trabalhar os problemas relativos a distorções na cor
-\item Descobrir formas de se minimizar os problemas inerentes da técnica de pintura hidrográfica: minimização do esticamento do filme, maximizar o acesso a concavidades do objeto
-\item Investigar formas de executar a simulação eficiente da pintura hidrográfica em tempo real usando a GPU
-\item Comparar a técnica de simulação com a pintura real
-\item Comparar a técnica escolhida com outras técnicas de simulação existentes
-\item Disponibilizar a ferramenta implementada para prestar um suporte aos processos de impressão 3D colorida de objetos do \acs{MAE} (\acl{MAE})
-\end{itemize}
+Texto  \acf{CNPq}, \acf{PGCOMP}.

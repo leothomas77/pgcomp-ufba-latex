@@ -37,40 +37,11 @@
 \usepackage{pifont}
 \usepackage{multirow}
 \usepackage{listings} 
-%\usepackage{colortbl}
+\usepackage{colortbl}
 \usepackage{xfrac}
 \usepackage[FIGTOPCAP]{subfigure}
 \usepackage[printonlyused, withpage]{acronym}
-\usepackage{multirow}
-\usepackage{color, colortbl}
-\usepackage{enumitem}
-\usepackage{gensymb}
-\usepackage{subfigure}
-%https://tex.stackexchange.com/questions/163768/write-pseudo-code-in-latex 
-\usepackage{amsmath}
-%\usepackage{algorithmic} %https://tex.stackexchange.com/questions/28627/how-to-install-the-algorithms-package/28629
-%\usepackage{algorithm}
-%\usepackage[noend]{algpseudocode}
-\usepackage[]{algorithm2e} 	%http://linorg.usp.br/CTAN/macros/latex/contrib/algorithm2e/doc/algorithm2e.pdf
-							%https://en.wikibooks.org/wiki/LaTeX/Algorithms#Typesetting_using_the_algorithmic_package
-%\usepackage{caption, subcaption}
-   %\captionsetup[sub]{labelformat=simple}
-    %\renewcommand{\thesubfigure}{(\alph{subfigure})} % Style: 1(a), 1(b)
-
-%\usepackage{tikz}
-
-%\usetikzlibrary{arrows,positioning,shapes}
-
 %\usepackage[colorlinks,citecolor=blue]{hyperref}
-
-\graphicspath{{./figuras/}}
-
-%https://tex.stackexchange.com/questions/163768/write-pseudo-code-in-latex
-\makeatletter
-\def\BState{\State\hskip-\ALG@thistlm}
-\makeatother
-
-%\definecolor{Gray}{gray}{0.9}
 
 % Universidade
 \university{Universidade Federal da Bahia}
@@ -91,7 +62,7 @@
 \majorfield{Ci\^{e}ncia da Computa\c{c}\~{a}o}
 
 % Titulo da dissertacao
-\title{Uma Proposta de Simula\c{c}\~{a}o Computacional 3D para Pintura Hidrogr\'{a}fica}
+\title{Uma Proposta de Simula\c{c}\~{a}o Computacional para a Pintura Hidrogr\'{a}fica}
 
 % Data da defesa
 % e.g. \date{19 de fevereiro de 2013}
@@ -124,16 +95,37 @@
 
 \pgcomppresentationpage
 
+
 %%%%%%%%%%%%%%%%%%%%%
 % Resumo em Portugues
 %%%%%%%%%%%%%%%%%%%%%
-\include{resumo}
+
+\resumo
+COLOQUE O RESUMO. Se preferir, crie um arquivo separado e o inclua via comando include.
+
+Para evitar problemas de formato neste template (de uso geral), usamos acentua\c{c}\~{a}o mostrada abaixo. 
+
+\begin{verbatim} 
+\c{c} \~{a} \'{a} \^{e} \'{\i}
+\end{verbatim} 
+
+N\~{a}o precisa fazer dessa forma, caso use pacotes adequados (latin1, etc.).
+
+% Palavras-chave do resumo em Portugues
+\begin{keywords}
+Impress\~{a}o 3D, hidrografia, simula\c{c}\~{a}o f\'{i}sica, fluidos, mapeamento de texturas.
+\end{keywords}
 
 %%%%%%%%%%%%%%%%%%%
 % Resumo em Ingles
 %%%%%%%%%%%%%%%%%%%
 
-\include{abstract}
+\abstract
+COLOQUE O RESUMO EM INGL\^{E}S. Se preferir, crie um arquivo separado e o inclua via comando include.
+% Palavras-chave do resumo em Ingles
+\begin{keywords}
+3d printing, hydrographics, physical simulation, fluids, texture mapping 
+\end{keywords}
 
 %%%%%%%%%%%%%%%%%%%
 % Sumario / Indice
@@ -155,17 +147,8 @@
 % Sintaxe da lista de acordo com a documentação do pacote `acronym'
 % documentação: http://mirror.unl.edu/ctan/macros/latex/contrib/acronym/acronym.pdf
 \begin{acronym}[PGCOMP]
-     \acro{API}[API]{\textit{Application Programming Interface}}
-     \acro{CPU}[CPU]{\textit{Central Processing Unit}}
-     \acro{CNPq}[CNPq]{Conselho Nacional de Desenvolvimento Científico e Tecnológico}
-     \acro{FPS}[FPS]{Frames por Segundo}
-     \acro{GPU}[GPU]{\textit{Graphics Processing Unit}}
-     \acro{MAE}[MAE]{Museu de Arqueologia e Etnologia da UFBA}
-     \acro{MEF}[MEF]{Método dos Elementos Finitos}
-     \acro{OpenGL}[OpenGL]{\textit{Open Graphics Library}}
-     \acro{PBD}[PBD]{\textit{Position-based Dynamics}}
-     \acro{PGCOMP}[PGCOMP]{Programa de Pós-Graduação em Ciência da Computação}
-     \acro{WTP}[WTP]{\textit{Water Transfer Printing}}
+    \acro{PGCOMP}{Programa de Pós-Graduação em Ciência da Computação}
+    \acro{CNPq}{Conselho Nacional de Desenvolvimento Científico e Tecnológico}
 \end{acronym}
 
 %% Parte textual
@@ -188,9 +171,9 @@
 
 \include{capitulo3}%def-proposta
 
-\include{capitulo4}%conclusao
+\include{capitulo4}%metodologia
 
-% Parte pos-textual
+%% Parte pos-textual
 \backmatter
 
 % Bibliografia
@@ -201,7 +184,18 @@
 \bibliography{biblio}
 
 % Apendices
-\include{apendice1}
+% Comente se naoo houver apendices
+%\appendix
+
+%\xchapter{Exemplo de Ap\^endice}{} %sem preambulo
+%\lipsum
+% Eh aconselhavel criar cada apendice em um arquivo separado, digamos
+% "apendice1.tex", "apendice.tex", ... "apendiceM.tex" e depois
+% inclui--los com:
+% \include{apendice1}
+% \include{apendice2}
+% ...
+% \include{apendiceM}
 
 %% Fim do documento
 \end{document}

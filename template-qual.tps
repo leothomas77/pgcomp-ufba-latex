@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1210
-NormalPos.bottom=548
-Class=BibTeXView
-Document=biblio.bib
+NormalPos.right=1008
+NormalPos.bottom=434
+Class=LaTeXView
+Document=template-qual.tex
 
 [Frame0_View0,0]
-TopLine=303
-Cursor=10074
+TopLine=21
+Cursor=0
 
 [Frame1]
 Flags=0
@@ -29,34 +29,16 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1210
-NormalPos.bottom=548
+NormalPos.right=1008
+NormalPos.bottom=434
 Class=LaTeXView
-Document=template-qual.tex
+Document=ufbathesis.cls
 
 [Frame1_View0,0]
-TopLine=166
-Cursor=4983
-
-[Frame2]
-Flags=0
-ShowCmd=1
-MinPos.x=-1
-MinPos.y=-1
-MaxPos.x=-1
-MaxPos.y=-1
-NormalPos.left=4
-NormalPos.top=26
-NormalPos.right=1210
-NormalPos.bottom=548
-Class=LaTeXView
-Document=capitulo3.tex
-
-[Frame2_View0,0]
-TopLine=93
-Cursor=8423
+TopLine=1428
+Cursor=41348
 
 [SessionInfo]
-FrameCount=3
-ActiveFrame=2
+FrameCount=2
+ActiveFrame=1
 

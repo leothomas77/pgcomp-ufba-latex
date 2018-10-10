@@ -1,167 +1,60 @@
-\xchapter{Defini\c{c}\~{a}o da proposta}{Será feita uma descrição da proposta, detalhamento dos recursos necessários, primeiros resultados, cronograma }
+\xchapter{Defini\c{c}\~{a}o da proposta}{} %sem preambulo
 
-\acresetall
+Texto da introdução com a contextualização, o marco teórico e a formulação de hipóteses
 
-\section{Proposta}
+%A numera\c{c}\~{a}o de figuras \'{e} sequencial, dentro do cap\'{\i}tulo. Ver Figura \ref{default-regular1} e Figura \ref{default-regular2}.
 
-A proposta para realização deste projeto de pesquisa divide-se em três grandes frentes de trabalho:
+%A numera\c{c}\~{a}o de tabelaas \'{e} sequencial, dentro do cap\'{\i}tulo. Ver Tabela \ref{default-table1} e Tabela \ref{default-table2}.
 
-\begin{itemize}
-\item Realização do experimento físico
-\item Implementação de uma simulação computacional 
-\item Elaboração da dissertação e artigos
-\end{itemize}
 
-Estas três frentes são executadas em paralelo, incrementalmente, partindo de um estágio menos elaborado (com protótipos) e progressivamente chegando ao estágio mais elaborado (refinamentos do protótipo inicial), até o fim do trabalho.
+\section{Exemplos de Figura}
 
-\subsection{Realização do experimento físico}
-
-Para realização do experimento físico, foram empregados os materiais básicos para a impressão hidrográfica descritos no \ref{apendice1:material}.
-
-Um experimento preliminar foi realizado com uma peça de prova impressa em 3D e uma película hidrográfica com uma estampa de padronagem similar à fibra de carbono. A peça de prova escolhida foi um modelo 3D de um artefato cultural com formato de tartaruga, que encontra-se no acervo do Museu de Arqueologia e Etnologia da UFBA. Isto porque é possível que os resultados deste projeto sejam aproveitados para colorir outras peças do acervo, que atualmente está sendo submetido a um processo de reconstrução 3D.
-
-A figura \ref{fig:experimento1} é uma foto do aspecto final da peça de prova utilizada no experimento preliminar.
-
-\begin{figure}
-\begin{center} 
-\includegraphics[scale=0.15]{experimento1.jpg}
-\caption{Experimento preliminar.}
-\label{fig:experimento1}
-\end{center} 
-\end{figure}
-
-A partir deste experimento preliminar, foi possível realizar anotações relevantes sobre o funcionamento da técnica. Estas anotações, junto às observações feitas em trabalhos anteriores foram levadas em consideração para a implementação da primeira simulação em software.
-
-Posteriormente, para a criação de películas com estampas customizadas, será preciso realizar impressões em uma impressora com tinta pigmentada em um filme para pintura hidrográfica apropriado. A tinta pigmentada, por apresentar resistência à água, oferece melhor fixação para o propósito da pintura hidrográfica. Nesta etapa do trabalho, está sendo avaliado se será utilizado um serviço de impressão com tinta pigmento contratando uma gráfica ou se será adquirida uma impressora específica para este fim.
-
-\subsection{Implementação da simulação computacional}
-
-Foi desenvolvido um software em C++ com OpenGL 4.3 e uso eficiente da GPU para renderização da simulação, que ocorre em tempo real. 
-
-A simulação computacional da pintura hidrográfica partiu da hipótese de que o comportamento do filme que flutua na superfície da água seria semelhante ao comportamento de uma malha deformável de pontos 2D. Quando colide com um corpo rígido em velocidade constante, a malha sofre uma deformação conforme a forma e o movimento do objeto que se desloca verticalmente, de cima para baixo, paralelo ao eixo Y. 
-
-Para efeito de simplificação dos cálculos para a verificação da colisão, o corpo rígido escolhido para a primeira simulação foi uma esfera.
-
-O software de simulação recebe os parâmetros para criação da malha, que inicialmente são as quantidades de pontos na sua largura L e comprimento C. Inicialmente não é especificado um parâmetro para expressar a espessura da malha. No entanto, esta informação é necessária e encontra-se fixa na simulação inicial implementada. Também é passado para o programa principal um parâmetro referente à distância entre os pontos, o grau de rigidez (que determinará o quanto a malha poderá esticar), e a textura que a malha assumirá. 
-
-Nesta simulação preliminar, foram determinadas duas opções de textura: um padrão xadrez e um mapa-múndi. A função de mapeamento da textura para a malha é definida em através da fração da distância entre os vértices (dos triângulos que compõem a malha) e a dimensão total da malha. Os vértices da malha recebem, além das suas coordenadas e das suas normais, qual a coordenada de textura mapeada. A aplicação da textura ocorre ainda quando a malha está plana. Quando a forma da malha é alterada, como os pontos já estão vinculados às coordenadas de textura, o desenho é igualmente deformado, representando a distorção sofrida pela película da hidropintura ao aderir a um substrato.
-
-\begin{figure}
-\begin{center} 
-\includegraphics[scale=0.6]{diagrama_implementacao.png}
-\caption{Representação das etapas do algoritmo implementado.}
-\label{fig:diagrama_implementacao}
-\end{center} 
-\end{figure}
-
-Para simular a deformação da malha, foi assumido que os pontos do filme que colidiram com o objeto seguirão a mesma velocidade vertical deste corpo. Isto seria suficiente para representar a adesão da película ao corpo em movimento. 
-
-O processo de verificação da colisão da esfera com a malha 2D foi implementado através de um \textit{compute shader}. Para este \textit{compute shader}, foram passados: posição, raio e velocidade da esfera, espessura do filme, um vetor com as posições de todos os vértices compõem a malha 2D. Este vetor é indexado através de recursos próprios do OpenGL, que permitem sistematizar a execução das instâncias dos \textit{compute shaders}, criando identificadores únicos para cada instância. Na implementação feita, \textit{compute shaders} são disparados simultaneamente através de grupos de trabalho determinados pelas dimensões L e C da malha 2D. Cada grupo de trabalho, por sua vez, subdivide-se em dimensões X e Y expressas na propriedade \textit{local size}, definida internamente no \textit{compute shader}. O dimensionamento do \textit{local size} foi afixado com o valor constante de 4 x 4, o que representou na prática um azulejamento da malha. Sendo assim, uma malha 2D de dimensões 64 x 32 pontos foi segmentada em azulejos 4 x 4, representando um total de 128 \textit{compute shaders} processados simultaneamente. Cada instância deste \textit{compute shader} verifica a distância entre um ponto do plano e o raio da esfera. Caso esta distância seja menor do que uma distância mínima estabelecida (considerando-se também a espessura da película), então houve a colisão. Neste caso, o ponto do plano seguirá o mesmo movimento no eixo Y imposto pela esfera. 
-
-Após verificação da colisão, os demais pontos do filme, que ainda não aderiram ao objeto, são puxados pelo movimento do objeto. Estes pontos seguirão com uma velocidade que será uma composição da velocidade do objeto com a velocidade imposta pelas partículas vizinhas (através do cálculo das restrições). Na simulação preliminar, estes pontos da malha são mantidos equidistantes com a técnica \acs{PBD} (\acl{PBD}). As partículas da malha são associadas duas a duas a uma restrição de distância. A cada intervalo de tempo, as posições das partículas são recalculadas, mantendo a restrição de distância. O recálculo da velocidade é necessário pois dá o efeito realista de movimentação da malha, fazendo com que de maneira natural a película abrace o objeto, tal qual ocorre no experimento físico.
-
-A paralelização do algoritmo com \acs{PBD} para aplicação das restrições de distância se deu com base no estudo apresentado em \cite{fratarcangeli2013gpu}. Para o cálculo paralelizado seja possível, é necessário implementar uma forma de indexar os vértices da malha, agrupando os pares de vértices que podem ser calculados independente dos outros. Esta técnica pode ser comparada ao cálculo da coloração de um grafo. Com isto, é possível tratar a atualização de malhas que possuam partículas que tenham interferências entre si.
-
-Na implementação, \textit{design} das restrições seguiu uma topologia na qual cada ponto da malha ficou com uma vizinhança dos pontos situados acima, abaixo, à sua direita, ou à sua esquerda. Sendo assim, exceto pelos pontos que situam-se nas bordas da malha - que possuem 2 ou 3 vizinhos - cada ponto possui 4 vizinhos. O cálculo da coloração do grafo determinou que nesta topologia, podem ser formados 4 partições da malha (representadas pelas cores), de forma que cada partição deve ser processada sequencialmente, sem interferir nas demais. A figura \ref{fig:topologia1} mostra a configuração das restrições e as cores representam as partições determinadas na implementação desta estrutura.
-
-A figura \ref{fig:diagrama_implementacao} traz um diagrama que representa as etapas mais importantes da implementação feita.
-
-\begin{figure}
-\begin{center} 
-\includegraphics[scale=0.5]{paralelizacao.png}
-\caption{Representação das restrições de distância como sendo as linhas que ligam os vértices da malha 2D. As cores representam as partições do conjunto de vértices, que deve ser processado sequencialmente pelo \textit{compute shader}.}
-\label{fig:topologia1}
-\end{center} 
-\end{figure}
-
-No algoritmo implementado, recálculo das velocidades e posições finais através (após o cálculo particionado das restrições) também foi realizado com o uso de \textit{compute shaders}, aproveitando a mesma lógica de indexação e azulejamento empregado no cálculo das colisões. Com isto, foi possível realizar uma simulação que proporcionasse a atualização final das posições com mais fluidez.
-
-\subsubsection{Resultados iniciais}
-
-A simulação foi executada em um ambiente compatível com:
-
-\begin{itemize}
-\item Processador Intel Core i5 7th Gen 7200U 2.5HGHz
-\item Windows 10
-\item Opengl 4.3 ou superior
-\item Placa gráfica NVDIA GeoForce 940MX com 2GB de memória RAM dedicada
-\item 8GB de memória RAM DDR4
-\item 1GB de disco rígido
-\end{itemize}
-
-O software implementado possui as seguintes características:
-
-\begin{itemize}
-\item Simula através de uma animação computacional em tempo real a impressão hidrográfica de um dos padrões (xadrez ou mapa-múndi) em uma esfera.
-\item Permite verificar a distorção do filme em 3 câmeras diferentes.
-\item Permite iniciar e parar o movimento da impressão hidrográfica.
-\item Permite girar a cena.
-\end{itemize}
-
-A principal parte do algoritmo da simulação está implementada em um laço, muito semelhante a uma animação baseada em física com a estrutura da integração Euleriana. A principal distinção entre esta simulação e a integração Euleriana é que esta basea-se no cálculo das posições. Como é sabido, pela técnica de \acs{PBD} o cálculo de posições de uma malha que sofreu uma colisão é resolvido através de um sistema de equações formado pelo conjunto de restrições com cardinalidade conhecida e um conjunto de posições com cardinalidade desconhecida que é dado como o cálculo de um sistema não linear. A resolução deste sistema é resolvida com iterações, através aproximação que leva ao método de Gauss-Siedel.
-
-A próxima etapa da simulação é calcular a posição dos pontos que colidiram. Isto é feito em duas situações distintas: no primeiro caso, o vértice que colidiu adera à superfície do objeto, assumindo a mesma velocidade e posição do objeto. Em uma segunda situação, o após a primeira colisão, haverá uma propagação do movimento para os pontos que ainda não colidiram. Esta propagação será imediatamente percebida nos elementos vizinhos aos que colidiram. Para os elementos mais distantes da colisão, esta propagação será mais lenta. Esta etapa também é executada por um \textit{compute shader}, que dispara em paralelo o cálculo das restrições de toda a malha. 
-
-A sequência de imagens na figura \ref{fig:simulacao} foi capturada da simulação da pintura obtida com esta implementação preliminar com a textura do mapa-múndi e uma malha de dimensões 32 x 64 pontos, totalizando 2048 pontos. 
-
-\begin{figure}
-\begin{center} 
-\includegraphics[scale=0.5]{simulacao_completa.png}
-\caption{\textbf{(a)} Início da simulação. \textbf{(b)} Esfera tocando a película. \textbf{(c)} O objeto continua a se movimentar esticando a película. \textbf{(d)} A película segue o movimento aderindo ao objeto. }
-\label{fig:simulacao}
-\end{center} 
-\end{figure}
-
-A verificação da eficácia da técnica será feita comparando-se os resultados de pinturas com uma pintura guiada a partir da simulação hidrográfica computacional. A simulação será considerada bem-sucedida na medida em que conseguir reproduzir fidedignamente uma pintura física. Também se busca uma simulação com uma boa taxa de \acs{FPS} (\acl{FPS}). Na etapa de avaliação de resultados, serão testados objetos com superfícies arbitrárias e serão feitas medições com algumas variações em função da quantidade de pontos calculados na cena e da quantidade de iterações feitas na simulação.
-
-\subsection{Elaboração da dissertação e artigos}
-
-A elaboração da dissertação partirá da consolidação do levantamento bibliográfico, do refinamento das anotações realizadas em todas etapas da experimentação, análise de dados, bem como o aproveitamento de parte da estrutura e do texto da qualificação.
-
-A partir da etapa de qualificação, serão gerados dois artigos: o primeiro com base na proposta e resultados iniciais da qualificação, e o segundo com a pesquisa e resultados finais gerados até a conclusão do mestrado.
-
-A estratégia para submissão de artigos se dará selecionando os congressos e revistas nacionais e internacionais relevantes na área da computação gráfica, priorizando os que possuam melhor qualificação.
-
-\section{Cronograma}
-
-A tabela \ref{tab:cronograma} lista as atividades que serão feitas até a conclusão do mestrado.
-
-\begin{table}[htbp]
-\caption{Cronograma das atividades do mestrado.}
-
+\begin{figure}[htbp]
 \begin{center}
-\begin{tabular}{|*{13}{c|}}
+  \includegraphics[scale=0.5]{ufba.eps}
+\caption{Bras\~{a}o da UFBA - Menor.}
+\label{default-regular1}
+\end{center}
+\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+  \includegraphics[scale=0.75]{ufba.eps}
+\caption{Bras\~{a}o da UFBA - Maior.}
+\label{default-regular2}
+\end{center}
+\end{figure}
+
+\lipsum
+
+\section{Exemplos de Tabela}
+\subsection{Uma Tabela}
+\begin{table}[htbp]
+\caption{Uma tabela com 3 linhas e 2 colunas.}
+\begin{center}
+\begin{tabular}{|c|c|} 
 \hline
-\multirow{ 2}{*}{Atividade} & \multicolumn{6}{c|} {2018.2} & \multicolumn{6}{c|} {2019.1} \\
-\cline{2-13}
-& 7 & 8 & 9 & 10 & 11 & 12 & 1 & 2 & 3 & 4 & 5 & 6 \\
+elemento 11 & elemento 12 \\ \hline
+elemento 21 & elemento 22 \\ \hline
+elemento 31 & elemento 32 \\
 \hline
-Estudo da literatura: & X & X & X & X & X & & & & & & & \\ \hline
-Definição da proposta & X & X & & & & & & & & & & \\ \hline
-Implementação & & & X & X & X & X & X & X & X & & & \\ \hline
-Análise dos dados & & & & & & & X & X & X & & & \\ \hline
-Escrita da dissertação & & & & & & & X & X & X & X & X & \\ \hline
-Escrita de artigos & & & & X & X & & & & & & & \\ \hline
-Qualificação & & & X & X & & & & & & & & \\ \hline
-Logística e produção de material gráfico & X & & X & & X & & X & & X & & & X \\ \hline
-Preparação da apresentação & & & & & & & & & & X & X & X \\ \hline
-Apresentação da dissertação & & & & & & & & & & & & X \\ \hline
 \end{tabular}
 \end{center}
-\label{tab:cronograma}
+\label{default-table1}
 \end{table}
 
-Segue o detalhamento das atividades do cronograma:
-\begin{itemize}
-\item Estudo da literatura: levantamento bibliográfico de trabalhos que serão tomados como referência para a elaboração da pesquisa.
-\item Definição da proposta: identificação da problemática, do problema, gerar hipóteses, formular o objetivo, delimitar escopo.
-\item Implementação: Concepção da simulação, modelagem do problema, proposição de solução técnica.
-\item Análise dos dados: Verificação dos resultados da simulação, comparação da simulação com o experimento físico, verificação do desempenho.
-\item Escrita da dissertação: Escrever o texto final que será apresentado na dissertação.
-\item Escrita de artigos: Escrever dois artigos e submetê-los para publicação em revistas ou congressos qualificados.
-\item Qualificação: Escrever e submeter o projeto de pesquisa para qualificação do trabalho.
-\item Logística e produção de material gráfico: Aquisição de material para realização do experimento. Realização de impressões na película hidrográfica.
-\item Preparação da apresentação: Criação da apresentação para apresentação final. Impressão e entrega do trabalho escrito.
-\item Apresentação da dissertação: Apresentação final do trabalho perante banca para avaliação.
+%\lipsum
 
-\end{itemize}
+\begin{table}[htbp]
+\caption{Uma tabela com 3 linhas e 3 colunas.}
+\begin{center}
+\begin{tabular}{|l|c|c|} 
+\hline
+elemento 11 & elemento 12 & elemento 13\\ \hline
+elemento 21 & elemento 22 & elemento 23\\ \hline
+elemento 31 & elemento 32 & elemento 33\\
+\hline
+\end{tabular}
+\end{center}
+\label{default-table2}
+\end{table}%
